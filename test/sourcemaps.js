@@ -16,7 +16,7 @@ var testFile1 = new Vinyl({
 	contents: new Buffer(testContentsInput)
 });
 
-test('should minify files', function(t) {
+test('should minify files and inline source maps', function(t) {
 	t.plan(13);
 
 	var stream = gulpUglify({
