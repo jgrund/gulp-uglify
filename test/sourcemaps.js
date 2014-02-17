@@ -3,7 +3,7 @@ var test = require('tape'),
 		Vinyl = require('vinyl'),
 		gulpUglify = require('../'),
 		convertSourceMap = require('convert-source-map'),
-		EOL = require('os').EOL,
+		EOL = '\n',
 		uglifyjs = require('uglify-js');
 	
 var testContentsInput = '"use strict"; (function(console, first, second) { console.log(first + second) }(console, 5, 10))';

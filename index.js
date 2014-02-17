@@ -2,7 +2,7 @@
 var through = require('through2'),
 	uglify = require('uglify-js'),
 	merge = require('deepmerge'),
-	EOL = require('os').EOL,
+	EOL = '\n',
 	uglifyError = require('./lib/error.js'),
 	convertSourceMap = require('convert-source-map');
 
