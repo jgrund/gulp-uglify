@@ -3,11 +3,8 @@ var test = require('tape'),
 		Vinyl = require('vinyl'),
 		gulpUglify = require('../'),
 		Readable = require('stream').Readable,
-		Stream = require('stream'),
 		PluginError = require('gulp-util/lib/PluginError');
 	
-var testContentsInput = 'function errorFunction(error) {';
-
 var testFile1 = new Vinyl({
 	cwd: "/home/terin/broken-promises/",
 	base: "/home/terin/broken-promises/test",
