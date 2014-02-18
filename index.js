@@ -59,7 +59,6 @@ module.exports = function(opt) {
 				.setProperty('sources', [ file.path ])
 				.setProperty('sourcesContent', [ stringContents ]);
 
-			console.log(sourceMap.toObject());
 			outString += EOL + sourceMap.toComment();
 		}
 
