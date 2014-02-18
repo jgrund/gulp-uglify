@@ -26,10 +26,16 @@ module.exports = function(opt) {
 		});
 
 		var stringContents = file.contents.toString(),
+			sourcesOriginal = [ stringContents ],
 			mangled,
 			outString,
 			sourceMap;
 
+		if (options.inSourceMap) {
+			options.inSourceMap = convertSourceMap.fromSource(stringContents).toObject();
+			stringContents = convertSourceMap.removeComments(stringContents);
+			sourcesOriginal = options.inSourceMap.sourcesContent;
+		}
 		if (options.outSourceMap) {
 			options.outSourceMap = file.relative.replace(/\.[\w]+$/, ".js.map");
 		}
@@ -57,7 +63,7 @@ module.exports = function(opt) {
 			sourceMap = convertSourceMap
 				.fromJSON(mangled.map)
 				.setProperty('sources', [ file.path ])
-				.setProperty('sourcesContent', [ stringContents ]);
+				.setProperty('sourcesContent', sourcesOriginal);
 
 			outString += EOL + sourceMap.toComment();
 		}
