@@ -26,7 +26,8 @@ module.exports = function(opt) {
 		});
 
 		var stringContents = file.contents.toString(),
-			sourcesOriginal = [ stringContents ],
+			inSourcesContent = [ stringContents ],
+			inSources = [ file.path ],
 			mangled,
 			outString,
 			sourceMap;
@@ -34,8 +35,10 @@ module.exports = function(opt) {
 		if (options.inSourceMap) {
 			options.inSourceMap = convertSourceMap.fromSource(stringContents).toObject();
 			stringContents = convertSourceMap.removeComments(stringContents);
-			sourcesOriginal = options.inSourceMap.sourcesContent;
+			inSourcesContent = options.inSourceMap.sourcesContent;
+			inSources = options.inSourceMap.sources;
 		}
+
 		if (options.outSourceMap) {
 			options.outSourceMap = file.relative.replace(/\.[\w]+$/, ".js.map");
 		}
@@ -62,8 +65,8 @@ module.exports = function(opt) {
 		if (options.outSourceMap) {
 			sourceMap = convertSourceMap
 				.fromJSON(mangled.map)
-				.setProperty('sources', [ file.path ])
-				.setProperty('sourcesContent', sourcesOriginal);
+				.setProperty('sources', inSources)
+				.setProperty('sourcesContent', inSourcesContent);
 
 			outString += EOL + sourceMap.toComment();
 		}
