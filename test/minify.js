@@ -1,9 +1,9 @@
 'use strict';
 var test = require('tape'),
-		Vinyl = require('vinyl'),
+		Vinyl = require('gulp-util').File,
 		gulpUglify = require('../'),
 		uglifyjs = require('uglify-js');
-	
+
 var testContentsInput = '"use strict"; (function(console, first, second) { console.log(first + second) }(5, 10))';
 var testContentsExpected = uglifyjs.minify(testContentsInput, {fromString: true}).code;
 

@@ -1,8 +1,8 @@
 'use strict';
 var test = require('tape'),
-		Vinyl = require('vinyl'),
+		Vinyl = require('gulp-util').File,
 		gulpUglify = require('../');
-	
+
 var testFile1 = new Vinyl({
 	cwd: "/home/terin/broken-promises/",
 	base: "/home/terin/broken-promises/test",
